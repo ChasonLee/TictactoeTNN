@@ -8,7 +8,7 @@ tp.hard_code_tnn()
 # tp.tnn.inputNodes[7].value = 1
 # tp.tnn.inputNodes[9].value = 1
 # tp.tnn.forwardPropagation()
-total_games = 100
+total_games = 3
 ai_wins = 0
 ai_lose = 0
 draws = 0

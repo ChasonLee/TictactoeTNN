@@ -35,7 +35,7 @@ class TnnPlayer:
                             if  0 <= ti < self.ROW and 0 <= tj < self.COL:
                                 if last_node == None:
                                     node = self.tnn.create_hidden_node(name="src[%d, %d] def[%d, %d]*%d"%(i, j, ti, tj, k))
-                                    node.add_input(self.tnn.inputNodes[(ti * self.COL + tj) * 2 + 1], 1)
+                                    node.add_input(self.tnn.inputNodes[(ti * self.COL + tj) * 2 + 1], 5)
                                     self.tnn.outputNodes[i * self.COL + j].add_input(node, 1)
                                 else:
                                     bias = self.tnn.create_hidden_node(value=1, name="hidden bias:src[%d, %d] def[%d, %d]*%d"%(i, j, ti, tj, k))
