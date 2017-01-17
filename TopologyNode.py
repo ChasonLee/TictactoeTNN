@@ -46,11 +46,11 @@ class Node:
         else:
             return False
 
-    def addInput(self, neuron, theta):
+    def add_input(self, neuron, theta):
         self.inputs.append(neuron)
         self.thetas.append(theta)
 
-    def delInput(self, inx):
+    def del_input(self, inx):
         if inx >= len(self.inputs) or inx >= len(self.thetas):
             print "error: Index of delete input operation out of range!"
             return False
@@ -58,5 +58,5 @@ class Node:
         self.thetas.pop(inx)
         return True
 
-    def getInputNum(self):
+    def get_input_num(self):
         return len(self.inputs)
