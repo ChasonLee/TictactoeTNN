@@ -12,6 +12,15 @@ class TopologicalNeuralNetwork:
         self.hiddenNodes = []
         self.beatFlag = False
 
+    def init_network(self):
+        for node in self.inputNodes:
+            node.value = 0
+        # for node in self.hiddenNodes:
+        #     node.value = 0
+        for node in self.outputNodes:
+            node.value = 0
+        self.beatFlag = False
+
     def get_input(self, board):
         lenBoard = len(board)
         if lenBoard * 2 != self.inputNum:

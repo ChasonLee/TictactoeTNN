@@ -31,7 +31,7 @@ for i in range(total_games):
 
         tp.tnn.get_input(gb.board)
         tp.tnn.forward_propagation()
-        # tp.tnn.show_structure(False, False, False)
+        tp.tnn.show_structure(showInput=False, showHidden=False, showConnect=False)
         if not gb.move(tp.tnn.max_output(), 1):
             print "AI random move..."
             gb.safe_rnd_move(1)
@@ -47,8 +47,10 @@ for i in range(total_games):
             draws += 1
             break
     gb.resume_board()
+    tp.tnn.init_network()
 
-print "total games:", total_games
+print
+print "Total games:", total_games
 print "AI wins:", ai_wins
 print "AI lose:", ai_lose
 print "Draws:", draws
