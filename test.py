@@ -20,9 +20,11 @@ from TnnPlayer import TnnPlayer
 from GameBoard import GameBoard
 tp = TnnPlayer()
 tp.HardCodeTnn()
-tp.tnn.inputNodes[2].value = 0
+tp.tnn.inputNodes[7].value = 1
+tp.tnn.inputNodes[9].value = 1
 tp.tnn.forwardPropagation()
-tp.tnn.showStructure()
+# tp.tnn.showStructure()
+
 gb = GameBoard()
 gb.Move(tp.tnn.maxOutput(),1)
 gb.ShowBoard()

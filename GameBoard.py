@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 __author__ = 'Chason'
+import random
+
 class GameBoard:
     def __init__(self, ROW = 3, COL = 3, WIN_NUM = 3):
         self.ROW = ROW
@@ -29,8 +31,16 @@ class GameBoard:
         print
 
     def Move(self, loc, player):
-        if self.board[loc] == 0:
-            self.board[loc] = player
-            return 1
+        if 0 <= loc < self.ROW * self.COL:
+            if self.board[loc] == 0:
+                self.board[loc] = player
+                return True
+            else:
+                print "Occupy error: location %d is not empty."
+                return False
         else:
-            return 0
+            print "Location error: can not move to %d."%loc
+            return False
+
+    def RndMove(self, player):
+        rnd = int(self.ROW * self.COL * random.random())

@@ -22,7 +22,7 @@ class TopologyNetwork:
         self.beatFlag = not self.beatFlag
 
     def maxOutput(self):
-        maxvalue = 0
+        maxvalue = -2
         res = None
         for i, node in enumerate(self.outputNodes):
             if maxvalue < node.value:
@@ -30,8 +30,8 @@ class TopologyNetwork:
                 res = i
         return res
 
-    def createHiddenNode(self):
-        node = Node(self.hiddenNum, self.beatFlag)
+    def createHiddenNode(self, value = 0, name = ""):
+        node = Node(self.hiddenNum, self.beatFlag, value=value, name=name)
         self.hiddenNodes.append(node)
         self.hiddenNum += 1
         return node
@@ -47,22 +47,17 @@ class TopologyNetwork:
         print
 
         for node in self.hiddenNodes:
-            print "|\thidden node%d:\t%f"%(node.id, node.value)
+            print "|\thidden node%d(%s):\t%f"%(node.id, node.name, node.value)
 
-        print "\n|\toutput nodes:\t"
-        for node in self.outputNodes:
-            print "\t", node.value,
-            if node.id % 3 == 2:
-                print
         print
         for node in self.hiddenNodes:
             if node.getInputNum() > 0:
-                print "|\t%d neurons connected to hidden node[%d]:"%(node.getInputNum(), node.id)
+                print "|\t%d neurons connected to hidden node%d(%s):"%(node.getInputNum(), node.id, node.name)
                 for i, inputNode in enumerate(node.inputs):
                     if inputNode.flag == None:
                         print "|\t\tinput node%d,\ttheta: %f" % (inputNode.id, node.thetas[i])
                     else:
-                        print "|\t\thidden node%d,\ttheta: %f"%(inputNode.id, node.thetas[inputNode.id])
+                        print "|\t\thidden node%d(%s),\ttheta: %f"%(inputNode.id, inputNode.name, node.thetas[i])
         for node in self.outputNodes:
             if node.getInputNum() > 0:
                 print "|\t%d neurons connected to output node%d:"%(node.getInputNum(), node.id)
@@ -70,5 +65,13 @@ class TopologyNetwork:
                     if inputNode.flag == None:
                         print "|\t\tinput node%d,\ttheta: %f" % (inputNode.id, node.thetas[i])
                     else:
-                        print "|\t\thidden node%d,\ttheta: %f"%(inputNode.id, node.thetas[inputNode.id])
+                        print "|\t\thidden node%d(%s),\ttheta: %f"%(inputNode.id, inputNode.name, node.thetas[i])
+
+
+        print "\n|\toutput nodes:\t"
+        for node in self.outputNodes:
+            print "\t%.6f"%node.value,
+            if node.id % 3 == 2:
+                print
+
         print "\******************************************************************************************/"

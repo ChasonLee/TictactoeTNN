@@ -3,10 +3,11 @@ __author__ = 'Chason'
 import math
 
 class Node:
-    def __init__(self, id, flag = None, value = 0, threshold = 0.5):
+    def __init__(self, id, flag = None, value = 0, name = "", threshold = 0.5):
         self.id = id
         self.flag = flag
         self.value = value
+        self.name = name
         self.threshold = threshold
         self.inputs = []
         self.thetas = []
@@ -14,15 +15,19 @@ class Node:
     def sigmoid(self, z):
         return 1.0 / (1.0 + math.exp(-z))
 
+    def tanh(self, z):
+        return (math.exp(z) - math.exp(-z)) / (math.exp(z) + math.exp(-z))
+
     def activation(self, beatFlag):
         inputNum = len(self.inputs)
         if inputNum != len(self.thetas):
             print "error: Input neurons and thetas must be the same size!"
             return
         elif inputNum == 0:
-            print "error: There are no inputs in this node."
+            # print "[id=%d, flag=%s, name=%s]warning: There are no inputs in this node."%(self.id, self.flag, self.name)
             return
 
+        self.flag = not self.flag
         # ensure all input nodes are activated.
         for inputNode in self.inputs:
             if inputNode.flag != None and inputNode.flag == beatFlag:
@@ -32,7 +37,7 @@ class Node:
         res = 0
         for inx in range(inputNum):
             res += self.inputs[inx].value * self.thetas[inx]
-        res = self.sigmoid(res)
+        res = self.tanh(res)
         self.value = res
 
     def output(self):
