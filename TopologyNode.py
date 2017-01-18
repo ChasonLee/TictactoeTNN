@@ -37,7 +37,7 @@ class Node:
         res = 0
         for inx in range(inputNum):
             res += self.inputs[inx].value * self.thetas[inx]
-        res = self.tanh(res)
+        res = self.sigmoid(res)
         self.value = res
 
     def output(self):
