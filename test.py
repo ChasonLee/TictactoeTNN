@@ -7,7 +7,7 @@ from GameBoard import GameBoard
 def loop_test():
     tp = TnnPlayer()
     tp.hard_code_tnn()
-    total_games = 300
+    total_games = 10
     ai_wins = 0
     ai_lose = 0
     draws = 0
